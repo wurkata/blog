@@ -1,24 +1,51 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bavitoi-prod
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: strapi
-  namespace: wurkata-staging
+  name: bavitoi-strapi
+  namespace: bavitoi-prod
   labels:
-    project: wurkata-blog
-    app: strapi
+    project: bavitoi-blog
+    app: bavitoi-strapi
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: strapi
+      app: bavitoi-strapi
   template:
     metadata:
       labels:
-        app: nginx
+        app: bavitoi-strapi
     spec:
       containers:
-        - name: strapi
-          image: strapi:0.1
+        - name: bavitoi-strapi
+          image: wurkata/bavitoi-strapi:0.12.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PG_USER
+              value: strapi-to
+            - name: PG_PASSWORD
+              value: secret
+            - name: PG_DB
+              value: blog
           ports:
-            - containerPort: 80
+            - containerPort: 1337
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bavitoi-strapi
+  namespace: bavitoi-prod
+  labels:
+    app: bavitoi-strapi
+spec:
+  selector:
+    app: bavitoi-strapi
+  ports:
+    - port: 1337
+      protocol: TCP

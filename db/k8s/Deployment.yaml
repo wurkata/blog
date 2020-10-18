@@ -1,9 +1,14 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: bavitoi-prod
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pg-deepthought
-  namespace: wurkata-staging
+  name: pg-deepthought-pvc
+  namespace: bavitoi-prod
 spec:
   accessModes:
     - ReadWriteOnce
@@ -16,12 +21,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pg-deepthought
-  namespace: wurkata-staging
+  namespace: bavitoi-prod
   labels:
-    project: wurkata-blog
+    project: bavitoi-blog
     app: pg-deepthought
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: pg-deepthought
@@ -43,3 +48,25 @@ spec:
               value: blog
           ports:
             - containerPort: 5432
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pg-deepthought-pvc
+            readOnly: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-deepthought
+  namespace: bavitoi-prod
+  labels:
+    app: pg-deepthought
+spec:
+  selector:
+    app: pg-deepthought
+  ports:
+    - port: 5432
+      protocol: TCP

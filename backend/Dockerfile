@@ -1,30 +1,27 @@
-FROM alpine as builder
+FROM nginx:1.19.3-alpine
 
 WORKDIR /app
 
 RUN apk add --update npm
 
-COPY ./package.json ./
+COPY package.json package.json
 
 RUN npm install
 
-COPY ./config ./config
-COPY ./extensions ./extensions
-COPY ./api ./api
-COPY ./public ./public
+COPY config config
+COPY extensions extensions
+COPY api api
+COPY public public
 
-CMD ["npm", "run", "build"]
+RUN npm run build
 
-
-# -----------------------------
-# Prod
-# -----------------------------
-FROM nginx:1.19.3
-COPY --from=builder /app/build /usr/share/nginx/html
-
+# ----------------------------------------
+# SETUP NGINX
+# ----------------------------------------
 RUN rm /etc/nginx/conf.d/default.conf
-COPY bavitoi.conf /etc/nginx/conf.d
+COPY default.conf /etc/nginx/conf.d
 
-EXPOSE 80
+COPY quick-start.sh quick-start.sh
+RUN ["chmod", "+x", "quick-start.sh"]
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["sh", "quick-start.sh"]
