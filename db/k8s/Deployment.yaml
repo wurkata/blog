@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pg-deepthought
+  namespace: wurkata-staging
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-cephfs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-deepthought
+  namespace: wurkata-staging
+  labels:
+    project: wurkata-blog
+    app: pg-deepthought
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pg-deepthought
+  template:
+    metadata:
+      labels:
+        app: pg-deepthought
+    spec:
+      containers:
+        - name: pg-deepthought
+          image: postgres:12.4-alpine
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_USER
+              value: strapi-to
+            - name: POSTGRES_PASSWORD
+              value: secret
+            - name: POSTGRES_DB
+              value: blog
+          ports:
+            - containerPort: 5432

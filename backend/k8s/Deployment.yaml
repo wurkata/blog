@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: strapi
+  namespace: wurkata-staging
+  labels:
+    project: wurkata-blog
+    app: strapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: strapi
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: strapi
+          image: strapi:0.1
+          ports:
+            - containerPort: 80

@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "name": "Article"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "published_timestamp": {
+      "type": "date",
+      "required": true
+    },
+    "category": {
+      "model": "categories",
+      "via": "articles"
+    },
+    "banner_image": {
+      "model": "banner-image",
+      "via": "articles"
+    },
+    "author": {
+      "type": "string",
+      "default": "Yavor",
+      "required": true
+    }
+  }
+}

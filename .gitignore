@@ -1,0 +1,10 @@
+./test
+/db/data
+
+# Ignore media
+/figures
+
+# Please output directory and local configuration
+plz-out
+.plzconfig.local
+
