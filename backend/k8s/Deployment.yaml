@@ -34,7 +34,7 @@ spec:
             - name: PG_DB
               value: blog
           ports:
-            - containerPort: 1337
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -47,5 +47,5 @@ spec:
   selector:
     app: bavitoi-strapi
   ports:
-    - port: 1337
+    - port: 80
       protocol: TCP
