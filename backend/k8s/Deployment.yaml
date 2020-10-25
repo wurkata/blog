@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: bavitoi-strapi
-          image: wurkata/bavitoi-strapi:0.12.4
+          image: wurkata/bavitoi-strapi:0.32.3
           imagePullPolicy: IfNotPresent
           env:
             - name: PG_USER
