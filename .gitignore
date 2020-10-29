@@ -8,3 +8,4 @@ db/data
 plz-out
 .plzconfig.local
 
+*-lock.json
