@@ -1,10 +1,10 @@
+import 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './containers/App';
-import client from './utils/apolloClient';
-import './styles/core.scss';
+import App from './src/app/containers/App';
+import client from './src/app/utils/apolloClient';
 
 ReactDOM.render(
   <Router>

@@ -20,6 +20,9 @@
   "plugins": [
     [
       "@babel/plugin-transform-react-jsx"
+    ],
+    [
+      "react-hot-loader/babel"
     ]
   ]
 }
