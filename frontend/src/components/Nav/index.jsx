@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Query from 'Query';
+import Query from 'Components/Query';
 
 import CATEGORIES_QUERY from 'Queries/category/categories';
 

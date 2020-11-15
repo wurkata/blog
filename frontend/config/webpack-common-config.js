@@ -28,6 +28,7 @@ module.exports = {
       Queries: path.resolve(paths.appSrc, 'queries'),
       Styles: path.resolve(paths.appSrc, 'assets/scss'),
     },
+    fallback: { path: false },
   },
   module: {
     rules: [
