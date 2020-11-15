@@ -25,6 +25,8 @@ module.exports = {
       Components: path.resolve(paths.appSrc, 'components'),
       Containers: path.resolve(paths.appSrc, 'containers'),
       Utils: path.resolve(paths.appSrc, 'utils'),
+      Queries: path.resolve(paths.appSrc, 'queries'),
+      Styles: path.resolve(paths.appSrc, 'assets/scss'),
     },
   },
   module: {

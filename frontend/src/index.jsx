@@ -3,9 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './app/containers/App';
-import client from './app/utils/apolloClient';
-import './assets/scss/main.scss';
+import App from 'Containers/App';
+import client from 'Utils/apolloClient';
+import 'Styles/index.scss';
 
 ReactDOM.render(
   <Router>
