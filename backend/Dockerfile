@@ -13,7 +13,7 @@ COPY extensions extensions
 COPY api api
 COPY public public
 
-RUN sh -c 'openssl rand 64 | echo "AWS_JWT_SECRET="$(base64 -w 0)'
+RUN sh -c 'openssl rand 64 | echo "ADMIN_JWT_SECRET="$(base64 -w 0)'
 
 RUN npm run build
 
