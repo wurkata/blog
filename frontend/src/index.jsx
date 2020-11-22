@@ -5,12 +5,12 @@ import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from 'Containers/App';
 import client from 'Utils/apolloClient';
-import 'Styles/index.scss';
+import styles from 'Styles/index.scss';
 
 ReactDOM.render(
   <Router>
     <ApolloProvider client={client}>
-      <App />
+      <App className={styles.App} />
     </ApolloProvider>
   </Router>,
   document.getElementById('core'),

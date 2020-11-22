@@ -60,10 +60,6 @@ module.exports = merge(common, {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              // generates a unique name for each class (e.g. app__app___2x3cr)
-              modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-              },
             },
           },
           {

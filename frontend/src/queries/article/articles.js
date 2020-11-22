@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const ARTICLES_QUERY = gql`
   query Articles {
@@ -9,8 +9,10 @@ const ARTICLES_QUERY = gql`
         id
         name
       }
-      image {
-        url
+      banner_image {
+        image {
+          url
+        }
       }
     }
   }

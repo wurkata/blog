@@ -4,7 +4,7 @@ import Query from 'Components/Query';
 import ARTICLES_QUERY from 'Queries/article/articles';
 
 const Home = () => (
-  <div>
+  <div id="content" data-uk-height-viewport="expand: true">
     <div className="uk-section">
       <div className="uk-container uk-container-large">
         <h1>Strapi blog</h1>

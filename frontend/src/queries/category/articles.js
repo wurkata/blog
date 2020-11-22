@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const CATEGORY_ARTICLES_QUERY = gql`
   query Category($id: ID!) {
@@ -9,8 +9,10 @@ const CATEGORY_ARTICLES_QUERY = gql`
         id
         title
         content
-        image {
-          url
+        banner_image {
+          image {
+            url
+          }
         }
         category {
           id

@@ -6,7 +6,7 @@ const path = require('path');
 
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const paths = require('./paths');
 const common = require('./webpack-common-config.js');
@@ -34,7 +34,9 @@ module.exports = merge(common, {
       },
     }),
     // Extract text/(s)css from a bundle, or bundles, into a separate file.
-    new ExtractTextPlugin('styles.css'),
+    new MiniCssExtractPlugin({
+      filename: `${paths.appAssets} / scss / index.scss`,
+    }),
   ],
   module: {
     rules: [
@@ -57,25 +59,17 @@ module.exports = merge(common, {
         test: /\.(css|scss)$/,
         // in the `src` directory
         include: [path.resolve(paths.appSrc)],
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                discardDuplicates: true,
-                sourceMap: false,
-                // This enables local scoped CSS based in CSS Modules spec
-                modules: true,
-                // generates unique name for each class (e.g. app__app___2x3cr)
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-              },
-            },
-            {
-              loader: 'sass-loader',
-            },
-          ],
-        }),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
