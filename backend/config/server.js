@@ -4,6 +4,8 @@ module.exports = ({ env }) => ({
   production: true,
   url: "http://0.0.0.0:1337",
   admin: {
-    url: "/cms",
+    auth: {
+      secret: env("ADMIN_JWT_SECRET"),
+    },
   },
 });

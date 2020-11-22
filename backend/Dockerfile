@@ -13,6 +13,8 @@ COPY extensions extensions
 COPY api api
 COPY public public
 
+RUN sh -c 'echo "ADMIN_JWT_SECRET="$(tr -cd "[:alnum:]" < /dev/urandom | fold -w30 | head -n1) > .env'
+
 RUN npm run build
 
 # ----------------------------------------
